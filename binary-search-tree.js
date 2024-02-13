@@ -112,45 +112,76 @@ class BinarySearchTree {
   /** dfsInOrder(): Traverse the array using in-order DFS.
    * Return an array of visited nodes. */
 
-  dfsInOrder() {
+  dfsInOrder(node = this.root) {
+    if (!node) {
+      return [];
+    }
 
+    const result = [];
+
+    if (node.left) {
+      result.push(...this.dfsInOrder(node.left));
+    }
+
+    result.push(node.val);
+
+    if (node.right) {
+      result.push(...this.dfsInOrder(node.right));
+    }
+
+    return result;
   }
 
   /** dfsPostOrder(): Traverse the array using post-order DFS.
    * Return an array of visited nodes. */
 
-  dfsPostOrder() {
+  dfsPostOrder(node = this.root) {
+    if (!node) {
+      return [];
+    }
 
+    const result = [];
+
+    if (node.left) {
+      result.push(...this.dfsPostOrder(node.left));
+    }
+
+    if (node.right) {
+      result.push(...this.dfsPostOrder(node.right));
+    }
+
+    result.push(node.val);
+
+    return result;
   }
 
   /** bfs(): Traverse the array using BFS.
    * Return an array of visited nodes. */
 
   bfs() {
+    if (!this.root) {
+      return [];
+    }
 
-  }
+    const queue = [this.root];
+    const result = [];
 
-  /** Further Study!
-   * remove(val): Removes a node in the BST with the value val.
-   * Returns the removed node. */
+    while (queue.length > 0) {
+      const current = queue.shift(); // Dequeue the front node
+      result.push(current.val); // Process the node
 
-  remove(val) {
+      // Enqueue the left child
+      if (current.left) {
+        queue.push(current.left);
+      }
 
-  }
+      // Enqueue the right child
+      if (current.right) {
+        queue.push(current.right);
+      }
+    }
 
-  /** Further Study!
-   * isBalanced(): Returns true if the BST is balanced, false otherwise. */
-
-  isBalanced() {
-
-  }
-
-  /** Further Study!
-   * findSecondHighest(): Find the second highest value in the BST, if it exists.
-   * Otherwise return undefined. */
-
-  findSecondHighest() {
-
+    return result;
   }
 }
 
