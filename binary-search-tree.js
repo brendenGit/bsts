@@ -167,15 +167,13 @@ class BinarySearchTree {
     const result = [];
 
     while (queue.length > 0) {
-      const current = queue.shift(); // Dequeue the front node
-      result.push(current.val); // Process the node
+      const current = queue.shift(); 
+      result.push(current.val); 
 
-      // Enqueue the left child
       if (current.left) {
         queue.push(current.left);
       }
 
-      // Enqueue the right child
       if (current.right) {
         queue.push(current.right);
       }
